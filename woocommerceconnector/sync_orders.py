@@ -421,13 +421,16 @@ def get_shipping_account_head(shipping):
 def get_tax_account_head(tax):
     tax_title = tax.get("name").encode("utf-8") or tax.get("method_title").encode("utf-8")
     try:
-	tax_account =  frappe.db.get_value("woocommerce Tax Account", \
-        	{"parent": "WooCommerce Config", "woocommerce_tax": tax_title}, "tax_account")
-    	if not tax_account:
-		frappe.throw("Tax Account not specified for woocommerce Tax {0}".format(tax.get("name")))
-    	return tax_account
+        tax_account =  frappe.db.get_value("woocommerce Tax Account", \
+            {"parent": "WooCommerce Config", "woocommerce_tax": tax_title}, "tax_account")
+
+        if not tax_account:
+            frappe.throw("Tax Account not specified for woocommerce Tax {0}".format(tax.get("name")))
+
+        return tax_account
     except:
-	frappe.throw("Error Occured " + tax_title + " Could not be processed")
+        frappe.throw("Could not find " + tax_title + " linked tax account")
+
 def close_synced_woocommerce_orders():
     for woocommerce_order in get_woocommerce_orders():
         if woocommerce_order.get("status").lower() != "cancelled":
