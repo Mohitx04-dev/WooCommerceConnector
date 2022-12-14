@@ -396,7 +396,7 @@ def update_taxes_with_shipping_lines(taxes, shipping_lines, woocommerce_settings
         #
         taxes.append({
             "charge_type": "Actual",
-            "account_head": get_shipping_account_head(shipping_charge),
+            "account_head": "Freight and Forwarding Charges - I",
             "description": shipping_charge["method_title"],
             "tax_amount": shipping_charge["total"],
             "cost_center": woocommerce_settings.cost_center
