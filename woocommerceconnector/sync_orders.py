@@ -218,6 +218,7 @@ def create_sales_order(woocommerce_order, woocommerce_settings, company=None):
             "shipping_address_name": shipping_address,
 	    "payment_terms_template": woocommerce_settings.payment_terms_template,
 	    "tc_name": woocommerce_settings.tc_name,
+	    "terms": woocommerce_settings.terms,
             "transaction_date": woocommerce_order.get("date_created")[:10]          # pull posting date from WooCommerce
         })
 
