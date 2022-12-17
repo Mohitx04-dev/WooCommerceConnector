@@ -360,7 +360,7 @@ def get_order_taxes(woocommerce_order, woocommerce_settings):
         
         taxes.append({
             "charge_type": "Actual",
-            "account_head": "GST-18 - I",
+            "account_head": "GST - I",
             "description": "{0} - {1}%".format(name, rate),
             "rate": rate,
             "tax_amount": flt(tax.get("tax_total") or 0) + flt(tax.get("shipping_tax_total") or 0), 
