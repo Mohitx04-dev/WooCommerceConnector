@@ -87,10 +87,10 @@ def create_item(woocommerce_item, warehouse, has_variant=0, attributes=None, var
         "web_long_description": woocommerce_item.get("description") or woocommerce_item.get("name")
         #"uoms": get_conversion_table(attributes, woocommerce_settings) if not has_variant else []
     }
-    if(woocommerce_item.get("tax_class")=="reduced-rate"):
-	item_dict.append("taxes", {"item_tax_template": "GST-5"})
+    if woocommerce_item.get("tax_class")=="reduced-rate":
+        item_dict.append("taxes", {"item_tax_template": "GST-5"})
     else:
-	item_dict.append("taxes", {"item_tax_template": "GST-18"})
+        item_dict.append("taxes", {"item_tax_template": "GST-18"})
     
     # in case of naming series (item_code = None), set naming series
     if not item_code:
