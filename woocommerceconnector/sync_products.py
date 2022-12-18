@@ -248,7 +248,7 @@ def is_item_exists(item_dict, attributes=None, variant_of=None, woocommerce_item
     else:
         return False
 
-def update_item(item_details, item_dict,):
+def update_item(item_details, item_dict):
     item = frappe.get_doc("Item", item_details['name'])
     item.append("taxes", {"item_tax_template": item_dict["item_tax_template"]})
     item_dict["stock_uom"] = item_details['stock_uom']
