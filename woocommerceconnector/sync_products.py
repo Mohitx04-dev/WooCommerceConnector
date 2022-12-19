@@ -104,23 +104,23 @@ def create_item(woocommerce_item, warehouse, has_variant=0, attributes=None, var
         #single & templates
         item_dict["product_category"] = get_categories(woocommerce_item, is_variant=False)
             
-    # if woocommerce_item.get("tax_class")=="reduced-rate":
-    #    item_dict["item_tax_template"]= "GST-5"
-    # else:
-    #    item_dict["item_tax_template"]= "GST-18"
+    if woocommerce_item.get("tax_class")=="reduced-rate":
+        item_dict["item_tax_template"]= "GST-5"
+    else:
+        item_dict["item_tax_template"]= "GST-18"
     
-    #item_dict["web_long_description"] = item_dict["woocommerce_description"]
+    item_dict["web_long_description"] = item_dict["woocommerce_description"]
     
     if not is_item_exists(item_dict, attributes, variant_of=variant_of, woocommerce_item_list=woocommerce_item_list):
         item_details = get_item_details(woocommerce_item)
 
         if not item_details:
             new_item = frappe.get_doc(item_dict)
-           # if woocommerce_item.get("tax_class")=="reduced-rate":
-           #     new_item.append("taxes", {"item_tax_template": "GST-5"})
-           # else:
-           #     new_item.append("taxes", {"item_tax_template": "GST-18"})
-           # new_item.insert()
+            if woocommerce_item.get("tax_class")=="reduced-rate":
+                new_item.append("taxes", {"item_tax_template": "GST-5"})
+            else:
+                new_item.append("taxes", {"item_tax_template": "GST-18"})
+            new_item.insert()
             name = new_item.name
 
         else:
@@ -267,7 +267,7 @@ def update_item(item_details, item_dict,):
 
     item.update(item_dict)
     item.flags.ignore_mandatory = True
-    # item.append("taxes", {"item_tax_template": item_dict["item_tax_template"]})
+    item.append("taxes", {"item_tax_template": item_dict["item_tax_template"]})
     item.save()
                         
 def has_variants(woocommerce_item):
