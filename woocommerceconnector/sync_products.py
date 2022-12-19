@@ -105,9 +105,9 @@ def create_item(woocommerce_item, warehouse, has_variant=0, attributes=None, var
         item_dict["product_category"] = get_categories(woocommerce_item, is_variant=False)
             
     if woocommerce_item.get("tax_class")=="reduced-rate":
-        item_dict["item_tax_template"]= "GST-5"
+        item_dict["item_tax_template"]= "GST-5 - I"
     else:
-        item_dict["item_tax_template"]= "GST-18"
+        item_dict["item_tax_template"]= "GST-18 - I"
     
     item_dict["web_long_description"] = item_dict["woocommerce_description"]
     
@@ -117,9 +117,9 @@ def create_item(woocommerce_item, warehouse, has_variant=0, attributes=None, var
         if not item_details:
             new_item = frappe.get_doc(item_dict)
             if woocommerce_item.get("tax_class")=="reduced-rate":
-                new_item.append("taxes", {"item_tax_template": "GST-5"})
+                new_item.append("taxes", {"item_tax_template": "GST-5 - I"})
             else:
-                new_item.append("taxes", {"item_tax_template": "GST-18"})
+                new_item.append("taxes", {"item_tax_template": "GST-18 - I"})
             new_item.insert()
             name = new_item.name
 
